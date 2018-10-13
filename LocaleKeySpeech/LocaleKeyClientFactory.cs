@@ -7,7 +7,7 @@ using Alexa.NET.Request;
 
 namespace Alexa.NET.LocaleKeySpeech
 {
-    public class LocaleKeyClientFactory
+    public class LocaleKeyClientFactory:ILocaleKeyClientFactory
     {
         public ILocaleKeyStore[] Stores { get; set; }
 
@@ -26,7 +26,7 @@ namespace Alexa.NET.LocaleKeySpeech
             Stores = stores;
         }
 
-        public LocaleKeyClient Create(SkillRequest request)
+        public ILocaleKeyClient Create(SkillRequest request)
         {
             if (request == null)
             {
@@ -36,7 +36,7 @@ namespace Alexa.NET.LocaleKeySpeech
             return Create(request.Context.System.Application.ApplicationId, request.Request.Locale);
         }
 
-        public LocaleKeyClient Create(string skillId, string locale)
+        public ILocaleKeyClient Create(string skillId, string locale)
         {
             if (string.IsNullOrWhiteSpace(skillId))
             {

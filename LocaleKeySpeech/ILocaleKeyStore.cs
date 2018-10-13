@@ -10,6 +10,6 @@ namespace Alexa.NET.LocaleKeySpeech
     {
         bool Supports(string skillId, string locale);
 
-        IOutputSpeech Translate(string skillId, string locale, string key, params object[] parameters);
+        Task<IOutputSpeech> GetSpeech(string skillId, string locale, string key, object[] parameters);
     }
 }
