@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <Description>Small helper library to allow Alexa.NET skills the ability to manage speech by locale</Description>
+    <Description>Small helper library to help maintain speech within Alexa.NET skills by locale</Description>
     <PackageLicenseUrl>https://github.com/stoiveyp/Alexa.NET.LocaleKeySpeech/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/stoiveyp/Alexa.NET.LocaleKeySpeech</PackageProjectUrl>
     <RepositoryUrl>https://github.com/stoiveyp/Alexa.NET.LocaleKeySpeech</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
