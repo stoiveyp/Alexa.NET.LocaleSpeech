@@ -39,7 +39,7 @@ namespace Alexa.NET.LocaleKeySpeech
                 case string s:
                     return GenerateSsml(s, arguments);
                 case string[] rawArray:
-                    return Generate(Pick.From(rawArray), arguments);
+                    return GenerateSsml(Pick.From(rawArray), arguments);
             }
 
             return null;

@@ -2,7 +2,7 @@
 
 namespace Alexa.NET.LocaleKeySpeech
 {
-    internal class DefaultArrayChoice : IArrayChoice
+    public class DefaultArrayChoice : IArrayChoice
     {
         private readonly Random Rnd = new Random(DateTime.Now.Millisecond);
 
