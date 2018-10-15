@@ -4,7 +4,9 @@ using Alexa.NET.Request;
 
 namespace Alexa.NET.LocaleSpeech
 {
-    public class LocaleSpeechFactory:ILocaleSpeechFactory
+    //https://developer.amazon.com/blogs/alexa/post/285a6778-0ed0-4467-a602-d9893eae34d7/how-to-localize-your-alexa-skills
+
+    public class LocaleSpeechFactory : ILocaleSpeechFactory
     {
         public ILocaleSpeechStore[] Stores { get; set; }
 
@@ -17,7 +19,7 @@ namespace Alexa.NET.LocaleSpeech
 
             if (!stores.Any())
             {
-                throw new ArgumentOutOfRangeException(nameof(stores),"No LocaleSpeech stores found");
+                throw new ArgumentOutOfRangeException(nameof(stores), "No LocaleSpeech stores found");
             }
 
             Stores = stores;
@@ -30,34 +32,33 @@ namespace Alexa.NET.LocaleSpeech
                 throw new ArgumentNullException(nameof(request));
             }
 
-            return Create(request.Context.System.Application.ApplicationId, request.Request.Locale);
+            return Create(request.Request.Locale);
         }
 
-        public ILocaleSpeech Create(string skillId, string locale)
+        public ILocaleSpeech Create(string locale)
         {
-            if (string.IsNullOrWhiteSpace(skillId))
-            {
-                throw new ArgumentNullException(nameof(skillId));
-            }
-
             if (string.IsNullOrWhiteSpace(locale))
             {
                 throw new ArgumentNullException(nameof(locale));
             }
 
-            var selectedStore = Stores.FirstOrDefault(s => s.Supports(skillId, locale));
-
-            if (selectedStore == null && locale.Length == 5 && locale[2] == '-')
+            var selectedStore = Stores.FirstOrDefault(s => s.Supports(locale));
+            if (selectedStore != null)
             {
-                selectedStore = Stores.FirstOrDefault(s => s.Supports(skillId, locale.Substring(0, 2)));
+                return new LocaleSpeech(selectedStore, locale);
             }
 
-            if (selectedStore == null)
+            if (locale.Length == 5 && locale[2] == '-')
             {
-                throw new InvalidOperationException($"unable to find store that supports locale {locale} within skill id {skillId}");
+                var generalLocale = locale.Substring(0, 2);
+                selectedStore = Stores.FirstOrDefault(s => s.Supports(generalLocale));
+                if (selectedStore != null)
+                {
+                    return new LocaleSpeech(selectedStore, generalLocale);
+                }
             }
 
-            return new LocaleSpeech(selectedStore,skillId,locale);
+            throw new InvalidOperationException($"unable to find store that supports locale {locale}");
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Alexa.NET.LocaleSpeech;
+using Alexa.NET.Request;
 using Alexa.NET.Response;
 using NSubstitute;
 using Xunit;
@@ -26,15 +27,7 @@ namespace LocaleSpeech.Tests
         {
             var store = Substitute.For<ILocaleSpeechStore>();
             var factory = new LocaleSpeechFactory(store);
-            Assert.Throws<ArgumentNullException>(() => { factory.Create(null);});
-        }
-
-        [Fact]
-        public void ArgumentThrowsWithNullSkillId()
-        {
-            var store = Substitute.For<ILocaleSpeechStore>();
-            var factory = new LocaleSpeechFactory(store);
-            Assert.Throws<ArgumentNullException>(() => factory.Create(null, "en-GB"));
+            Assert.Throws<ArgumentNullException>(() => { factory.Create((SkillRequest)null);});
         }
 
         [Fact]
@@ -42,26 +35,26 @@ namespace LocaleSpeech.Tests
         {
             var store = Substitute.For<ILocaleSpeechStore>();
             var factory = new LocaleSpeechFactory(store);
-            Assert.Throws<ArgumentNullException>(() => factory.Create("skillid", null));
+            Assert.Throws<ArgumentNullException>(() => factory.Create((string)null));
         }
 
         [Fact]
         public void ArgumentThrowsWithNoMatchingStore()
         {
             var store = Substitute.For<ILocaleSpeechStore>();
-            store.Supports(Arg.Any<string>(), Arg.Any<string>()).Returns(false);
+            store.Supports(Arg.Any<string>()).Returns(false);
             var factory = new LocaleSpeechFactory(store);
-            Assert.Throws<InvalidOperationException>(() => factory.Create("skillid", "en-GB"));
+            Assert.Throws<InvalidOperationException>(() => factory.Create("en-GB"));
         }
 
         [Fact]
         public void SupportChecksForGeneralIfSpecificFound()
         {
             var store = Substitute.For<ILocaleSpeechStore>();
-            store.Supports("skillid","en-GB").Returns(false);
-            store.Supports("skillid", "en").Returns(true);
+            store.Supports("en-GB").Returns(false);
+            store.Supports("en").Returns(true);
             var factory = new LocaleSpeechFactory(store);
-            var result = factory.Create("skillid", "en-GB");
+            var result = factory.Create("en-GB");
             Assert.NotNull(result);
         }
 
@@ -69,11 +62,10 @@ namespace LocaleSpeech.Tests
         public void CreatesClientWithMatchingStore()
         {
             var store = Substitute.For<ILocaleSpeechStore>();
-            store.Supports(Arg.Any<string>(), Arg.Any<string>()).Returns(true);
+            store.Supports(Arg.Any<string>()).Returns(true);
             var factory = new LocaleSpeechFactory(store);
-            var client = (Alexa.NET.LocaleSpeech.LocaleSpeech)factory.Create("skillid", "en-GB");
+            var client = (Alexa.NET.LocaleSpeech.LocaleSpeech)factory.Create("en-GB");
             Assert.Equal(store, client.Store);
-            Assert.Equal("skillid",client.SkillId);
             Assert.Equal("en-GB",client.Locale);
         }
 
@@ -81,8 +73,8 @@ namespace LocaleSpeech.Tests
         public async Task TranslateWithNoKeyThrows()
         {
             var store = Substitute.For<ILocaleSpeechStore>();
-            store.Get(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), null).Returns((IOutputSpeech)null);
-            var client = new Alexa.NET.LocaleSpeech.LocaleSpeech(store,"skillid","locale");
+            store.Get(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<object[]>()).Returns((IOutputSpeech)null);
+            var client = new Alexa.NET.LocaleSpeech.LocaleSpeech(store,"locale");
             await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => client.Get("test"));
         }
 
@@ -91,8 +83,8 @@ namespace LocaleSpeech.Tests
         {
             var speech = new PlainTextOutputSpeech {Text = "this is a test"};
             var store = Substitute.For<ILocaleSpeechStore>();
-            store.Get(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), null).Returns(speech);
-            var client = new Alexa.NET.LocaleSpeech.LocaleSpeech(store, "skillid", "locale");
+            store.Get(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<object[]>()).Returns(speech);
+            var client = new Alexa.NET.LocaleSpeech.LocaleSpeech(store, "locale");
             var result = await client.Get("test");
             Assert.Equal(speech,result);
         }

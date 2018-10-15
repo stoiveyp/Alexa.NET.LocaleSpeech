@@ -5,33 +5,28 @@ using Alexa.NET.Response;
 
 namespace Alexa.NET.LocaleSpeech
 {
-    public class DictionaryLocaleStore : ILocaleSpeechStore
+    public class DictionaryLocaleSpeechStore : ILocaleSpeechStore
     {
-        public string SkillId { get; }
         public Dictionary<string, IDictionary<string, object>> Languages { get; } = new Dictionary<string, IDictionary<string, object>>();
 
-        public DictionaryLocaleStore()
+        public DictionaryLocaleSpeechStore()
         {
         }
 
-        public DictionaryLocaleStore(string skillId)
+        public bool Supports(string locale)
         {
-            SkillId = skillId ?? throw new ArgumentNullException(nameof(skillId));
+            return Languages.ContainsKey(locale.ToLower());
         }
 
-        public bool Supports(string skillId, string locale)
+        public Task<IOutputSpeech> Get(string locale, string key, object[] parameters)
         {
-            return (SkillId == null || SkillId == skillId) && Languages.ContainsKey(locale);
-        }
-
-        public Task<IOutputSpeech> Get(string skillId, string locale, string key, object[] parameters)
-        {
-            var value = Languages[locale][key];
+            var value = Languages[locale.ToLower()][key];
             return Task.FromResult(ObjectToSpeech.Generate(value,parameters));
         }
 
         public void AddLanguage(string locale, IDictionary<string, object> speech)
         {
+            locale = locale.ToLower();
             if (Languages.ContainsKey(locale))
             {
                 Languages[locale] = speech;
