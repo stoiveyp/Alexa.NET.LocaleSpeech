@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Alexa.NET.Response;
+using Alexa.NET.Response.Ssml;
 
 namespace Alexa.NET.LocaleKeySpeech
 {
@@ -11,12 +13,23 @@ namespace Alexa.NET.LocaleKeySpeech
 
         public static IOutputSpeech Generate(object text)
         {
-            return Generate(text, null);
+            var result = Generate(text, null);
+            if (result == null)
+            {
+                throw new InvalidOperationException("unable to generate IOutputSpeech");
+            }
+
+            return result;
         }
 
         public static IOutputSpeech GenerateSsml(object text)
         {
-            return GenerateSsml(text, null);
+            var result = GenerateSsml(text, null);
+            if (result == null)
+            {
+                throw new InvalidOperationException("unable to generate IOutputSpeech");
+            }
+            return result;
         }
 
         public static IOutputSpeech Generate(object text, object[] arguments)
@@ -27,6 +40,8 @@ namespace Alexa.NET.LocaleKeySpeech
                     return Generate(raw,arguments);
                 case string[] rawArray:
                     return Generate(Pick.From(rawArray), arguments);
+                case Speech speech:
+                    return GenerateSsml(speech, arguments);
             }
 
             return null;
@@ -40,6 +55,8 @@ namespace Alexa.NET.LocaleKeySpeech
                     return GenerateSsml(s, arguments);
                 case string[] rawArray:
                     return GenerateSsml(Pick.From(rawArray), arguments);
+                case Speech speech:
+                    return GenerateSsml(speech, arguments);
             }
 
             return null;
@@ -53,6 +70,11 @@ namespace Alexa.NET.LocaleKeySpeech
         public static IOutputSpeech GenerateSsml(string ssml, object[] arguments)
         {
             return new SsmlOutputSpeech { Ssml = arguments?.Any() ?? false ? string.Format(ssml,arguments) : ssml };
+        }
+
+        public static IOutputSpeech GenerateSsml(Speech speech, object[] arguments)
+        {
+            return new SsmlOutputSpeech { Ssml = arguments?.Any() ?? false ? string.Format(speech.ToXml(), arguments) : speech.ToXml() };
         }
     }
 }
