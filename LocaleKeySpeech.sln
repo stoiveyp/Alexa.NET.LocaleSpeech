@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexa.NET.LocaleKeySpeech", "LocaleKeySpeech\Alexa.NET.LocaleKeySpeech.csproj", "{D29FFB15-F10E-434F-960E-3D36DC319A8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alexa.NET.LocaleSpeech", "LocaleKeySpeech\Alexa.NET.LocaleSpeech.csproj", "{D29FFB15-F10E-434F-960E-3D36DC319A8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocaleKeySpeech.Tests", "..\LocaleKeySpeech.Tests\LocaleKeySpeech.Tests.csproj", "{B4CF456D-8146-4992-8369-B359DBCC6554}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocaleKeySpeech.Tests", "..\LocaleKeySpeech.Tests\LocaleKeySpeech.Tests.csproj", "{B4CF456D-8146-4992-8369-B359DBCC6554}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

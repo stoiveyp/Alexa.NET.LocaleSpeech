@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alexa.NET.LocaleKeySpeech
+namespace Alexa.NET.LocaleSpeech
 {
     public class DefaultArrayChoice : IArrayChoice
     {

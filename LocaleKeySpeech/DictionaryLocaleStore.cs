@@ -4,9 +4,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Alexa.NET.Response;
 
-namespace Alexa.NET.LocaleKeySpeech
+namespace Alexa.NET.LocaleSpeech
 {
-    public class DictionaryLocaleStore : ILocaleKeyStore
+    public class DictionaryLocaleStore : ILocaleSpeechStore
     {
         public string SkillId { get; }
         public Dictionary<string, IDictionary<string, object>> Languages { get; } = new Dictionary<string, IDictionary<string, object>>();
@@ -25,7 +25,7 @@ namespace Alexa.NET.LocaleKeySpeech
             return (SkillId == null || SkillId == skillId) && Languages.ContainsKey(locale);
         }
 
-        public Task<IOutputSpeech> GetSpeech(string skillId, string locale, string key, object[] parameters)
+        public Task<IOutputSpeech> Get(string skillId, string locale, string key, object[] parameters)
         {
             var value = Languages[locale][key];
             return Task.FromResult(ObjectToSpeech.Generate(value,parameters));

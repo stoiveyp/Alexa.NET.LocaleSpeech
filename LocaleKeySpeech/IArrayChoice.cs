@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexa.NET.LocaleKeySpeech
+namespace Alexa.NET.LocaleSpeech
 {
     public interface IArrayChoice
     {

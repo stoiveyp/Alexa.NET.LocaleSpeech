@@ -5,7 +5,7 @@ using System.Text;
 using Alexa.NET.Response;
 using Alexa.NET.Response.Ssml;
 
-namespace Alexa.NET.LocaleKeySpeech
+namespace Alexa.NET.LocaleSpeech
 {
     public static class ObjectToSpeech
     {

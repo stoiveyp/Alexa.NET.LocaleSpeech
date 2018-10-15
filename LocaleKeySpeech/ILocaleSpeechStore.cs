@@ -4,12 +4,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Alexa.NET.Response;
 
-namespace Alexa.NET.LocaleKeySpeech
+namespace Alexa.NET.LocaleSpeech
 {
-    public interface ILocaleKeyStore
+    public interface ILocaleSpeechStore
     {
         bool Supports(string skillId, string locale);
 
-        Task<IOutputSpeech> GetSpeech(string skillId, string locale, string key, object[] parameters);
+        Task<IOutputSpeech> Get(string skillId, string locale, string key, object[] parameters);
     }
 }

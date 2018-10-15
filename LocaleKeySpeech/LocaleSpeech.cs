@@ -2,24 +2,24 @@
 using System.Threading.Tasks;
 using Alexa.NET.Response;
 
-namespace Alexa.NET.LocaleKeySpeech
+namespace Alexa.NET.LocaleSpeech
 {
-    public class LocaleKeyClient : ILocaleKeyClient
+    public class LocaleSpeech : ILocaleSpeech
     {
-        public ILocaleKeyStore Store { get; }
+        public ILocaleSpeechStore Store { get; }
         public string SkillId { get; }
         public string Locale { get; }
 
-        public LocaleKeyClient(ILocaleKeyStore store, string skillId, string locale)
+        public LocaleSpeech(ILocaleSpeechStore store, string skillId, string locale)
         {
             Store = store ?? throw new ArgumentNullException(nameof(store));
             SkillId = skillId ?? throw new ArgumentNullException(nameof(skillId));
             Locale = locale ?? throw new ArgumentNullException(nameof(locale));
         }
 
-        public async Task<IOutputSpeech> GetSpeech(string key)
+        public async Task<IOutputSpeech> Get(string key)
         {
-            var result = await Store.GetSpeech(SkillId, Locale, key, null);
+            var result = await Store.Get(SkillId, Locale, key, null);
             if (result == null)
             {
                 throw new ArgumentOutOfRangeException(nameof(key),$"No key \"{key}\" found in store");
@@ -28,9 +28,9 @@ namespace Alexa.NET.LocaleKeySpeech
             return result;
         }
 
-        public async Task<IOutputSpeech> GetSpeech(string key, params object[] arguments)
+        public async Task<IOutputSpeech> Get(string key, params object[] arguments)
         {
-            var result = await Store.GetSpeech(SkillId, Locale, key, arguments);
+            var result = await Store.Get(SkillId, Locale, key, arguments);
             if (result == null)
             {
                 throw new ArgumentOutOfRangeException(nameof(key), $"No key \"{key}\" found in store");
