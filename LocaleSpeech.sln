@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alexa.NET.LocaleSpeech", "LocaleKeySpeech\Alexa.NET.LocaleSpeech.csproj", "{D29FFB15-F10E-434F-960E-3D36DC319A8C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocaleKeySpeech.Tests", "..\LocaleKeySpeech.Tests\LocaleKeySpeech.Tests.csproj", "{B4CF456D-8146-4992-8369-B359DBCC6554}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocaleSpeech.Tests", "LocaleKeySpeech.Tests\LocaleSpeech.Tests.csproj", "{58890554-409A-495A-875D-98523C7E27B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{D29FFB15-F10E-434F-960E-3D36DC319A8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D29FFB15-F10E-434F-960E-3D36DC319A8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D29FFB15-F10E-434F-960E-3D36DC319A8C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B4CF456D-8146-4992-8369-B359DBCC6554}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B4CF456D-8146-4992-8369-B359DBCC6554}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B4CF456D-8146-4992-8369-B359DBCC6554}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B4CF456D-8146-4992-8369-B359DBCC6554}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58890554-409A-495A-875D-98523C7E27B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58890554-409A-495A-875D-98523C7E27B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58890554-409A-495A-875D-98523C7E27B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58890554-409A-495A-875D-98523C7E27B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
