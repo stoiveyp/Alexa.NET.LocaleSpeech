@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Alexa.NET.LocaleSpeech
+﻿namespace Alexa.NET.LocaleSpeech
 {
     public class SpeechInformation
     {

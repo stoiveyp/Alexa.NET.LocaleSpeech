@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alexa.NET.LocaleSpeech;
+﻿using Alexa.NET.LocaleSpeech;
 using Alexa.NET.Response;
 using Alexa.NET.Response.Ssml;
 using NSubstitute;
