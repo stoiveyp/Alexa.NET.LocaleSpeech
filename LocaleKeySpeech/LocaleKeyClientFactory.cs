@@ -50,6 +50,11 @@ namespace Alexa.NET.LocaleKeySpeech
 
             var selectedStore = Stores.FirstOrDefault(s => s.Supports(skillId, locale));
 
+            if (selectedStore == null && locale.Length == 5 && locale[2] == '-')
+            {
+                selectedStore = Stores.FirstOrDefault(s => s.Supports(skillId, locale.Substring(0, 2)));
+            }
+
             if (selectedStore == null)
             {
                 throw new InvalidOperationException($"unable to find store that supports locale {locale} within skill id {skillId}");
