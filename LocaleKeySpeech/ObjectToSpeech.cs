@@ -40,6 +40,8 @@ namespace Alexa.NET.LocaleSpeech
                     return Generate(Pick.From(rawArray), arguments);
                 case Speech speech:
                     return GenerateSsml(speech, arguments);
+                case SpeechInformation info:
+                    return info.Ssml ? GenerateSsml(info.Speech, arguments) : Generate(info.Speech, arguments);
             }
 
             return null;
@@ -55,6 +57,8 @@ namespace Alexa.NET.LocaleSpeech
                     return GenerateSsml(Pick.From(rawArray), arguments);
                 case Speech speech:
                     return GenerateSsml(speech, arguments);
+                case SpeechInformation info:
+                    return info.Ssml ? GenerateSsml(info.Speech, arguments) : Generate(info.Speech, arguments);
             }
 
             return null;
