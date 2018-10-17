@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Description>Small helper library to help maintain speech within Alexa.NET skills by locale</Description>
+    <PackageLicenseUrl>https://github.com/stoiveyp/Alexa.NET.LocaleSpeech/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/stoiveyp/Alexa.NET.LocaleSpeech</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/stoiveyp/Alexa.NET.LocaleSpeech</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.0</Version>
+    <PackageId>Alexa.NET.LocaleSpeech</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Alexa.NET" Version="1.5.4" />
+  </ItemGroup>
+
+</Project>
